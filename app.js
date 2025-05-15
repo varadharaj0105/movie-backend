@@ -17,7 +17,8 @@ const ratingsRoutes = require('./routes/ratings');
 const path = require('path');
 
 const app = express();
-app.use(cors());
+const cors = require('cors');
+app.use(cors({ origin: 'https://cinemindss.netlify.app' }));
 app.use(express.json());
 app.use(
   helmet({
@@ -33,7 +34,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 app.use('/uploads', (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "https://cinemindss.netlify.app");
   next();
 }, express.static('uploads'));
 
