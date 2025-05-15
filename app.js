@@ -32,10 +32,13 @@ const limiter = rateLimit({
   message: "Too many requests, please try again later.",
 });
 app.use(limiter);
-app.use('/uploads', (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://cinemindss.netlify.app");
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://cinemindss.netlify.app");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
-}, express.static('uploads'));
+});
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/', authRoutes);
