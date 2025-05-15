@@ -5,6 +5,8 @@ const User = require('../models/User');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const BACKEND_URL = "https://movie-backend-1g7r.onrender.com";
+
 
 // Set up multer for handling file uploads
 const upload = multer({
@@ -35,7 +37,7 @@ router.get('/profile', authenticateToken, async (req, res) => {
       location: user.location,
       birthdate: user.birthdate,
 // In your backend response
-profileImage: user.profileImage ? `http://localhost:5000/${user.profileImage.replace(/\\/g, '/')}` : null
+profileImage: user.profileImage ? `${BACKEND_URL}/${user.profileImage.replace(/\\/g, '/')}` : null
     });
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch profile' });
