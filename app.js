@@ -17,7 +17,6 @@ const ratingsRoutes = require('./routes/ratings');
 const path = require('path');
 
 const app = express();
-const cors = require('cors');
 app.use(cors({ origin: 'https://cinemindss.netlify.app' }));
 app.use(express.json());
 app.use(
